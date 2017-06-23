@@ -4,21 +4,51 @@
 
 body {
 	background-color: #E5ECEF;
+	font-family: 'Roboto', Helvetica;
 }
 
 main {
+
 	height: 345px;
 	width: 500px;
 	margin: 0 auto;
-	filter: drop-shadow(8px 8px 10px gray);
+	margin-top: 15%;
+	filter: drop-shadow(8px 8px 10px black);
 }
 
+.hidden {
+	display: none;
+}
+
+/*Background colors used*/
+.blue {
+	background-color: #3498db;
+}
+
+.yellow {
+	background-color: #f1c40f;
+}
+
+.red {
+	background-color: #e74c3c;
+}
+
+.purple {
+	background-color: #8e44ad;
+}
+
+.green {
+	background-color: #2ecc71;
+}
+
+.turquoise {
+	background-color: #1abc9c;
+}
+
+/*Image section*/
 .image-wrapper {
 	position: relative;
 	display: inline-block;
-/*	background-color: #233649;
-*/	
-	background-color: #18A0FF;
 	height: 345px;
 	width: 115px;
 	vertical-align: top;
@@ -26,9 +56,9 @@ main {
 }
 
 .image-wrapper img {
-	margin-left: -100px;
 	opacity: 0.5;
 	height: 100%;
+	width: 100%;
 }
 
 .fadedBlack {
@@ -38,26 +68,6 @@ main {
 	left: 0;
 	bottom: 0;
 	background-color: rgba(0,0,0,.6)
-}
-
-.quoteMarks {
-	position: absolute;
-	left: 25%;
-	top: 15%;
-	color: #545157;
-	opacity: 0.5;
-	filter: brightness(150%);
-}
-
-.content-wrapper {
-	position: relative;
-	display: inline-block;
-	background-color: #18A0FF;
-	color: #FCFDFE;
-	height: 345px;
-	width: 375px;
-	padding: 10px;
-	vertical-align: top;
 }
 
 .arrow-wrapper {
@@ -75,21 +85,61 @@ main {
 	cursor: pointer;
 }
 
+/*Quote and content section*/
+.content-wrapper {
+	position: relative;
+	display: inline-block;
+	color: #FCFDFE;
+	height: 345px;
+	width: 375px;
+	padding: 10px;
+	vertical-align: top;
+}
+
+.quoteMarks {
+	position: absolute;
+	left: 10%;
+	top: 5%;
+	color: #545157;
+	opacity: 0.5;
+	filter: brightness(150%);
+}
+
 .likes-wrapper {
+	font-family: 'Comfortaa', Helvetica;
 	position: absolute;
 	top: 10px;
 	right: 10px;
-	width: 60px;
+	/*width: 60px;*/
 	border-radius: 15px;
 	background-color: rgba(0,0,0,.1);
 	cursor: pointer;
-	font-size: 1.25em;
+	font-size: .85em;
+	padding: 5px 9px 5px 7px;
+}
+
+.quote-wrapper {
+	position: absolute;
+	top: 45px;
+	bottom: 60px;
+	right: 20px;
+	left: 20px;
+	font-size: 1.5em;
+	line-height: 40px;
+	text-transform: uppercase;
 	padding: 10px;
 }
 
-.orange {
-	color: #FFBB34;
-	border: 2px solid #FFBB34;
+.quote {
+	display: table;
+	position: relative;
+	top: 15%;
+	text-align: center;
+}
+
+.activeLike {
+	font-size: 1.1em;
+	color: #ffff00;
 }
 
 .name-wrapper {
@@ -108,22 +158,49 @@ main {
 	cursor: pointer;
 }
 
+/*New quote / form section*/
 .formGroup {
 	position: inherit;
-	left: 75px;
-	bottom: 60px;
-	height: 200px;
-	width: 200px;
+	left: 55px;
+	top: 20px;
+	height: 250px;
+	width: 250px;
 	color: #18A0FF;
 	background-color: white;
 	padding: 15px;
 	filter: drop-shadow(8px 8px 10px gray);
 }
 
-.exit {
-	float: right;
+.formGroup h3 {
+	margin-top: 0px;
 }
 
-.hidden {
-	display: none;
+.resizedTextbox {
+	-moz-box-sizing: border-box;
+	width: 100%;
+	height: 70px;
+	padding: 3px}
+
+.btn {
+	position: absolute;
+	bottom: 5%;
+	left: 25%;
+	transition: all 0.3s;
+	border: 2px solid #3498db;
+	background-color: white;
+	color: #3498db;
+	padding: 8px 20px;
+	font-weight: 700;
+	font-size: 1.5em;
+	cursor: pointer;
+}
+
+.btn:hover {
+	color: white;
+	background-color: #3498db;
+}
+
+.exit {
+	float: right;
+	cursor: pointer;
 }

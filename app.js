@@ -4,8 +4,8 @@ let state = {
 	quotes: [
 		{ 
 			id: 0,
-			quote: 'Don\'t you think that if I were wrong, i\'d know it?',
-			name: 'Sheldon Cooper',
+			quote: 'Once a cobra bit Chuck Norris\' leg. After five days of excruciating pain, the cobra died.',
+			name: 'Chuck Norris',
 			likes: 7,
 			didUserLike: false
 		},
@@ -22,10 +22,24 @@ let state = {
 			name: 'Chuck Norris',
 			likes: 2,
 			didUserLike: false
+		},
+		{ 
+			id: 3,
+			quote: 'Chuck Norris\' tears cure cancer. Too bad he has never cried.',
+			name: 'Chuck Norris',
+			likes: 5,
+			didUserLike: false
+		},
+		{ 
+			id: 4,
+			quote: 'Chuck Norris is the only man to ever defeat a brick wall in a game of tennis.',
+			name: 'Chuck Norris',
+			likes: 1,
+			didUserLike: false
 		}
 
 	],
-	images: ['http://vignette2.wikia.nocookie.net/uncyclopedia/images/d/dc/Chuck-norris-002.jpg', 'http://vignette2.wikia.nocookie.net/uncyclopedia/images/d/dc/Chuck-norris-002.jpg', 'http://www.amirmosadegh.com/wp-content/uploads/2008/09/chuck_norris.jpg', 'http://www.thefamouspeople.com/profiles/images/chuck-norris-4.jpg']
+	images: ['http://www.page2images.com/tmp/20170623/page2images_6HteFEgix1fP9V5X1.png', 'http://www.page2images.com/tmp/20170623/page2images_CwbVk0gNbg4BCBtJ1.png', 'http://www.page2images.com/tmp/20170623/page2images_C9qZFvcrKvNpNnQl1.png']
 }
 
 // State Modification Functions
@@ -36,7 +50,6 @@ function addLike(state, id) {
 }
 
 function removeLike(state, id) {
-	console.log('removeLike successfully called');
 	state.quotes[id].likes--;
 	state.quotes[id].didUserLike = false;
 	renderLikes(state, id);
@@ -73,22 +86,44 @@ function addQuote(state, string) {
 
 //Render Functions
 function renderQuoteInfo(state) {
-	console.log(state);
 	let quoteID = state.count;
+	renderBackgroundColor();
 	renderLikes(state, quoteID);
 	renderQuote(state, quoteID);
 	renderName(state, quoteID);
 	renderImage(state);
 }
 
+function renderBackgroundColor(state) {
+	let num = Math.floor(Math.random() * 6);
+	if (num == 0) {
+		$('main').removeClass("yellow red purple green turquoise").addClass("blue");
+	} else if (num == 1) {
+		$('main').removeClass("blue red purple green turquoise").addClass("yellow");
+	} else if (num == 2) {
+		$('main').removeClass("blue yellow purple green turquoise").addClass("red");
+	} else if (num == 3) {
+		$('main').removeClass("blue yellow red green turquoise").addClass("purple");
+	} else if (num == 4) {
+		$('main').removeClass("blue yellow red purple turquoise").addClass("green");
+	} else if (num == 5) {
+		$('main').removeClass("blue yellow red purple green").addClass("turquoise");
+	}
+}
+
 function renderLikes(state, ID) {
 	let id = ID || state.count;
+	if (state.quotes[id].didUserLike === true) {
+		$('.likes-wrapper').addClass("activeLike");
+	} else {
+		$('.likes-wrapper').removeClass("activeLike");
+	}
 	$('#likesNumber').html('<span>' + state.quotes[id].likes + '</span>');
 }
 
 function renderQuote(state, ID) {
 	let id = ID || state.count;
-	$('.quote').html('<h1>' + state.quotes[id].quote + '</h1>');
+	$('.quote').html('<span>' + state.quotes[id].quote + '</span>');
 }
 
 function renderName(state, ID) {
@@ -119,7 +154,7 @@ $('#next').on('click', function(event) {
 	nextQuote(state);
 });
 
-$('#addLike').on('click', function(event) {
+$('.likes-wrapper').on('click', function(event) {
 	event.preventDefault();
 	let id = state.count;
 	if (state.quotes[id].didUserLike === false) {
@@ -134,7 +169,7 @@ $('#addLike').on('click', function(event) {
 
 $('.addQuote').on('click', function(event) {
 	event.preventDefault();
-	$('.formGroup').html('<i class="fa fa-times-circle-o fa-2x exit" aria-hidden="true" onclick="hideForm()"></i><form><h3>Add a new Chuck Norris quote!</h3><label>Quote: </label><input type="text" name="inputQuote"><br><input type="submit" value="Submit"></form>');
+	$('.formGroup').html('<i class="fa fa-times-circle-o fa-2x exit" aria-hidden="true" onclick="hideForm()"></i><form><h3>Add a new Chuck Norris quote!</h3><label>Quote: </label><br><input type="text" name="inputQuote" maxlength="100" class="resizedTextbox" required><br><input type="submit" value="Submit" class="btn"></form>');
 	$('.formGroup').fadeIn("slow");
 	
 
@@ -143,8 +178,9 @@ $('.addQuote').on('click', function(event) {
 $('.formGroup').submit(function(event) {
 	event.preventDefault();
 	let newQuote = $('input[name=inputQuote').val();
-	console.log(newQuote);
 	addQuote(state, newQuote);
-	$('.formGroup').addClass("hidden");
+	$('.formGroup').hide();
 });
+
+
 
