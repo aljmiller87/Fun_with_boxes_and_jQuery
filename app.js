@@ -118,27 +118,23 @@ function renderLikes(state, ID) {
 	} else {
 		$('.likes-wrapper').removeClass("activeLike");
 	}
-	$('#likesNumber').html('<span>' + state.quotes[id].likes + '</span>');
+	$('#likesNumber').html(`<span>${state.quotes[id].likes}</span>`);
 }
 
 function renderQuote(state, ID) {
 	let id = ID || state.count;
-	$('.quote').html('<span>' + state.quotes[id].quote + '</span>');
+	$('.quote').html(`<span>${state.quotes[id].quote}</span>`);
 }
 
 function renderName(state, ID) {
 	let id = ID || state.count;
-	$('.name-wrapper').html('<h5>' + '- ' + state.quotes[id].name + '</h5>');
+	$('.name-wrapper').html(`<h5>-  ${state.quotes[id].name} </h5>`);
 }
 
 function renderImage(state) {
 	let num = Math.floor(Math.random() * state.images.length);
 	$('.imageHolder').html(`<img src="${state.images[num]}">`)
 }
-
-let hideForm = function() {
-	$('.formGroup').fadeOut("slow");
-};
 
 
 // Event Listeners
@@ -159,10 +155,10 @@ $('.likes-wrapper').on('click', function(event) {
 	let id = state.count;
 	if (state.quotes[id].didUserLike === false) {
 		addLike(state, id);
-		$('.likes-wrapper').addClass("orange");
+		$('.likes-wrapper').addClass("activeLike");
 	} else {
 		removeLike(state, id);
-		$('.likes-wrapper').removeClass("orange");
+		$('.likes-wrapper').removeClass("activeLike");
 	}
 	
 });
@@ -171,8 +167,6 @@ $('.addQuote').on('click', function(event) {
 	event.preventDefault();
 	$('.formGroup').html('<i class="fa fa-times-circle-o fa-2x exit" aria-hidden="true" onclick="hideForm()"></i><form><h3>Add a new Chuck Norris quote!</h3><label>Quote: </label><br><input type="text" name="inputQuote" maxlength="100" class="resizedTextbox" required><br><input type="submit" value="Submit" class="btn"></form>');
 	$('.formGroup').fadeIn("slow");
-	
-
 });
 
 $('.formGroup').submit(function(event) {
@@ -181,6 +175,18 @@ $('.formGroup').submit(function(event) {
 	addQuote(state, newQuote);
 	$('.formGroup').hide();
 });
+
+
+// Two ways to hide form
+// On blur
+$(document).on('blur','.formGroup', function() {
+    $(this).fadeOut(1000);
+});
+
+// When exit button is clicked
+let hideForm = function() {
+	$('.formGroup').fadeOut("slow");
+};
 
 
 
